@@ -1,0 +1,3 @@
+Un ejemplo de uso del cifrado **shift Caesar** es el envío de un mensaje sencillo entre dos personas que acuerdan desplazar cada letra del alfabeto tres posiciones; 
+por ejemplo, el texto “HOLA” se convertiría en “KROD”, lo que permite ocultar el contenido a observadores casuales. Entre sus ventajas se encuentran su extrema simplicidad, facilidad de implementación y valor pedagógico para introducir conceptos básicos de criptografía. 
+Sin embargo, tambien tiene desventajas en las que se incluye: ofrece una seguridad muy baja, puede romperse fácilmente mediante fuerza bruta o análisis de frecuencia, y no es adecuado para proteger información sensible en contextos reales.
