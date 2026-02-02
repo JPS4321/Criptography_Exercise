@@ -1,24 +1,55 @@
-BASE64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+tabla_base64 = {
+    'A': 0,  'B': 1,  'C': 2,  'D': 3,  'E': 4,  'F': 5,  'G': 6,
+    'H': 7,  'I': 8,  'J': 9,  'K': 10, 'L': 11, 'M': 12, 'N': 13,
+    'O': 14, 'P': 15, 'Q': 16, 'R': 17, 'S': 18, 'T': 19, 'U': 20,
+    'V': 21, 'W': 22, 'X': 23, 'Y': 24, 'Z': 25,
 
-def a_binario_manual(numero, bits):
-    """Convierte un número decimal a binario usando divisiones entre 2."""
-    resultado = ""
+    'a': 26, 'b': 27, 'c': 28, 'd': 29, 'e': 30, 'f': 31, 'g': 32,
+    'h': 33, 'i': 34, 'j': 35, 'k': 36, 'l': 37, 'm': 38, 'n': 39,
+    'o': 40, 'p': 41, 'q': 42, 'r': 43, 's': 44, 't': 45, 'u': 46,
+    'v': 47, 'w': 48, 'x': 49, 'y': 50, 'z': 51,
+
+    '0': 52, '1': 53, '2': 54, '3': 55, '4': 56, '5': 57,
+    '6': 58, '7': 59, '8': 60, '9': 61,
+
+    '+': 62, '/': 63
+}
+
+
+def base64_a_decimal(caracter, tabla_base64):
+    return tabla_base64[caracter]
+
+
+def decimal_a_binario(numero):
+    binario = ""
+
     while numero > 0:
-        resultado = str(numero % 2) + resultado
+        residuo = numero % 2
+        binario = str(residuo) + binario
         numero = numero // 2
 
-    return resultado.zfill(bits)
+    while len(binario) < 6:
+        binario = "0" + binario
+
+    return binario
 
 
-texto = input("Ingresa texto en Base64: ")
-binario = ""
+def base64_a_binario(texto, tabla_base64):
+    resultado_binario = ""
 
-for caracter in texto:
-    if caracter == "=":
-        continue  # el padding no se convierte
+    for caracter in texto:
+        if caracter == '=':
+            continue
 
-    valor = BASE64.index(caracter)   # valor 0–63
-    binario += a_binario_manual(valor, 6)  # Base64 usa 6 bits
+        decimal = base64_a_decimal(caracter, tabla_base64)
+        binario = decimal_a_binario(decimal)
+        resultado_binario += binario
 
-print("Resultado en binario:")
-print(binario)
+    return resultado_binario
+
+
+entrada = "SG9sYQ=="
+salida = base64_a_binario(entrada, tabla_base64)
+
+print("Texto Base64:", entrada)
+print("Texto Binario:", salida)
